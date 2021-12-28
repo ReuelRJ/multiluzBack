@@ -1,9 +1,12 @@
 package com.multiluz.contabilidade.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.multiluz.contabilidade.enuns.Colaborador;
 
@@ -23,7 +26,14 @@ public class Vendedor {
 	
 	private Colaborador tipo;
 	
+	@OneToOne(mappedBy = "vendedor", fetch = FetchType.LAZY)
 	private Endereco endereco;
 	
+	@OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
 	private Telefone telefone;
+	
+	@OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
+	private Receita venda;
+	
+	
 }
