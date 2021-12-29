@@ -22,6 +22,8 @@ public class Endereco implements Serializable{
 	
 	private String logradouro;
 	
+	private String numResisdencial;
+	
 	private String complemento;
 	
 	private String bairro;

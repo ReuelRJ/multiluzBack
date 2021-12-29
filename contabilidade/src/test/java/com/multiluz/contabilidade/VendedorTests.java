@@ -1,6 +1,5 @@
 package com.multiluz.contabilidade;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -46,13 +45,22 @@ class VendedorTests {
 	@InjectMocks
 	private EnderecoService endSer;
 
+	
+	@Test
+	void verifyVendedorSave() {
+		Vendedor v1 = new Vendedor();
+		v1.setNome("Antonio");
+		v1.setTipo(Colaborador.Estoquista);
+		vendSer.save(v1);
+		verify(vr, times(1)).save(v1);
+	}
+	
 	@Test
 	void verifyVendedorSaveEstoquista() {
 		Vendedor v1 = new Vendedor();
 		v1.setNome("Antonio");
 		v1.setTipo(Colaborador.Estoquista);
 		vendSer.save(v1);
-		verify(vr, times(1)).save(v1);
 		Assert.assertTrue("O vendedor não é um estoquista", v1.getTipo() == Colaborador.Estoquista);
 	}
 	
@@ -62,7 +70,6 @@ class VendedorTests {
 		v1.setNome("Antonio");
 		v1.setTipo(Colaborador.Vendedor);
 		vendSer.save(v1);
-		verify(vr, times(1)).save(v1);
 		Assert.assertTrue("O vendedor não é um vendedor", v1.getTipo() == Colaborador.Vendedor);
 	}
 		
@@ -74,8 +81,6 @@ class VendedorTests {
 		e1.setLogradouro("Rua x");
 		e1.setVendedor(v1);
 		endSer.save(e1);
-		verify(er, times(1)).save(e1);
-		
 		
 		v1.setEndereco(e1);
 		vendSer.save(v1);
@@ -91,7 +96,6 @@ class VendedorTests {
 		t1.setTelCel(995000102);
 		t1.setVendedor(v1);
 		telSer.save(t1);
-		verify(tr, times(1)).save(t1);
 		List<Telefone> tels = new ArrayList<Telefone>();
 		tels.add(t1);
 		
