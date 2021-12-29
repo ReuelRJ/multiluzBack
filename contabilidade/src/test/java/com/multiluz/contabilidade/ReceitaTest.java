@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.multiluz.contabilidade.enuns.Colaborador;
@@ -28,6 +29,7 @@ public class ReceitaTest {
 	
 	@InjectMocks
 	private ReceitaService receServ;
+	
 	
 	@Test
 	void verifySaveReceita() {
@@ -47,32 +49,11 @@ public class ReceitaTest {
 	}
 	
 	
-	//metodo para totalizar
-	public double totalizador (List<Double> valores) {
-		Double total = 0.;
-		
-		for (int i = 0; i < valores.size(); i++) {
-			total = total + valores.get(i).doubleValue();
-		}
-		return total;
-	}
-	
-	public double comissao(Double valor, Double fixo, String vendedor) {
-		double pagamento = 0.;
-		if (vendedor == Colaborador.Vendedor.toString()) {
-			pagamento = (valor * 0.02) +fixo;
-		}else if(vendedor == Colaborador.Estoquista.toString()) {
-			pagamento = (valor * 0.01) +fixo;
-		}else if (vendedor == Colaborador.Gerente.toString()) {
-			pagamento = 0.;
-		}
-		return pagamento;
-	}
 	
 	@Test
 	void verifyLotOfValuesReceita() {
 		Receita rec = new Receita();
-
+		TestUtil tu = new TestUtil();
 		Vendedor vend = new Vendedor();
 		vend.setNome("Junior");
 		List<Double> valores = new ArrayList<Double>();
@@ -87,7 +68,7 @@ public class ReceitaTest {
 		valores.add(5.9);
 		valores.add(78.85);
 		valores.add(15.50);
-		rec.setValor(totalizador(valores));
+		rec.setValor(tu.totalizador(valores));
 
 		Assert.assertTrue("O somatorio nao bate", rec.getValor() == 3736.1600000000003);
 	}
@@ -95,6 +76,7 @@ public class ReceitaTest {
 	@Test
 	void comissao() {
 		Receita rec = new Receita();
+		TestUtil tu = new TestUtil();
 		Vendedor vend = new Vendedor();
 		vend.setNome("Junior");
 		vend.setTipo(Colaborador.Vendedor);
@@ -110,9 +92,9 @@ public class ReceitaTest {
 		valores.add(5.9);
 		valores.add(78.85);
 		valores.add(15.50);
-		rec.setValor(totalizador(valores));
+		rec.setValor(tu.totalizador(valores));
 		
-		Double pagamento = comissao(rec.getValor(), 100., vend.getTipo().toString());
+		Double pagamento = tu.comissao(rec.getValor(), 100., vend.getTipo().toString());
 		
 		Assert.assertTrue("Comissao esta errada", pagamento == 174.72320000000002);
 	}

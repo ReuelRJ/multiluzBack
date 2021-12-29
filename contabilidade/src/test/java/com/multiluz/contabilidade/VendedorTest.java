@@ -24,7 +24,7 @@ import com.multiluz.contabilidade.service.TelefoneService;
 import com.multiluz.contabilidade.service.VendedorService;
 
 @SpringBootTest
-class VendedorTests {
+class VendedorTest {
 
 	@Mock
 	private EnderecoRepository er;
@@ -61,7 +61,7 @@ class VendedorTests {
 		v1.setNome("Antonio");
 		v1.setTipo(Colaborador.Estoquista);
 		vendSer.save(v1);
-		Assert.assertTrue("O vendedor não é um estoquista", v1.getTipo() == Colaborador.Estoquista);
+		
 	}
 	
 	@Test
