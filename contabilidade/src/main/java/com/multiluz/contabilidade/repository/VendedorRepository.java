@@ -6,4 +6,5 @@ import com.multiluz.contabilidade.model.Vendedor;
 
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
 
+	Vendedor findByNome (String nome);
 }

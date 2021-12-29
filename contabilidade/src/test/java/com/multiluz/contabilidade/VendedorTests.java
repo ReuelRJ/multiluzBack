@@ -1,7 +1,16 @@
 package com.multiluz.contabilidade;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.multiluz.contabilidade.enuns.Colaborador;
@@ -11,59 +20,89 @@ import com.multiluz.contabilidade.model.Vendedor;
 import com.multiluz.contabilidade.repository.EnderecoRepository;
 import com.multiluz.contabilidade.repository.TelefoneRepository;
 import com.multiluz.contabilidade.repository.VendedorRepository;
+import com.multiluz.contabilidade.service.EnderecoService;
+import com.multiluz.contabilidade.service.TelefoneService;
+import com.multiluz.contabilidade.service.VendedorService;
 
 @SpringBootTest
 class VendedorTests {
 
-	@Autowired
-	EnderecoRepository er;
+	@Mock
+	private EnderecoRepository er;
 
-	@Autowired
-	TelefoneRepository tr;
+	@Mock
+	private TelefoneRepository tr;
 
-	@Autowired
-	VendedorRepository vr;
+	@Mock
+	private VendedorRepository vr;
+	
+	
+	@InjectMocks
+	private VendedorService vendSer;
+	
+	@InjectMocks
+	private TelefoneService telSer;
+
+	@InjectMocks
+	private EnderecoService endSer;
 
 	@Test
-	void contextLoads() {
+	void verifyVendedorSaveEstoquista() {
+		Vendedor v1 = new Vendedor();
+		v1.setNome("Antonio");
+		v1.setTipo(Colaborador.Estoquista);
+		vendSer.save(v1);
+		verify(vr, times(1)).save(v1);
+		Assert.assertTrue("O vendedor não é um estoquista", v1.getTipo() == Colaborador.Estoquista);
 	}
-
+	
 	@Test
-	void vendedor() {
-		
+	void verifyVendedorSaveVendedor() {
 		Vendedor v1 = new Vendedor();
 		v1.setNome("Antonio");
 		v1.setTipo(Colaborador.Vendedor);
-		vr.save(v1);
+		vendSer.save(v1);
+		verify(vr, times(1)).save(v1);
+		Assert.assertTrue("O vendedor não é um vendedor", v1.getTipo() == Colaborador.Vendedor);
+	}
+		
+	@Test
+	void verifyVendedorEndereço() {
+		Vendedor v1 = new Vendedor();
 		
 		Endereco e1 = new Endereco();
 		e1.setLogradouro("Rua x");
 		e1.setVendedor(v1);
-		er.save(e1);
+		endSer.save(e1);
+		verify(er, times(1)).save(e1);
+		
+		
+		v1.setEndereco(e1);
+		vendSer.save(v1);
+		Assert.assertTrue("O vendedor não mora na rua inscrita", v1.getEndereco().getLogradouro() == "Rua x");
+	}
+	
+	@Test
+	void verifyTelefoneVendedor() {
+		Vendedor v1 = new Vendedor();
 		
 		Telefone t1 = new Telefone();
 		t1.setDdd(21);
 		t1.setTelCel(995000102);
 		t1.setVendedor(v1);
-		tr.save(t1);
+		telSer.save(t1);
+		verify(tr, times(1)).save(t1);
+		List<Telefone> tels = new ArrayList<Telefone>();
+		tels.add(t1);
 		
-		Vendedor v2 = new Vendedor();
-		v2.setNome("André");
-		v2.setTipo(Colaborador.Vendedor);
-		vr.save(v2);
-		
-		Endereco e2 = new Endereco();
-		e2.setLogradouro("Rua y");
-		e2.setVendedor(v2);
-		er.save(e2);
-		
-		Telefone t2 = new Telefone();
-		t2.setDdd(21);
-		t2.setTelCel(993029291);
-		t2.setVendedor(v2);
-		tr.save(t2);
-		
-		
+		v1.setTelefones(tels);
+		Assert.assertTrue("O Telefone do vendedor não está correto", v1.getTelefones().get(0).getTelCel() == 995000102);
 	}
+		
+		
+		
+		
+		
+		
 	
 }
