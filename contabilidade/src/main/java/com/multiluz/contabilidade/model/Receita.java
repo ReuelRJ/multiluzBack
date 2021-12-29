@@ -34,7 +34,7 @@ public class Receita implements Serializable {
 	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(columnDefinition = "smallint")	
-	private FormaPagamento venda;
+	private FormaPagamento tipo;
 	
 	private int parcelas;
 	
