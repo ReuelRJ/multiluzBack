@@ -41,7 +41,7 @@ public class ReceitaTest {
 		rec.setData(LocalDate.of(2020, 12, 27));
 		rec.setParcelas(1);
 		rec.setValor(26.);
-		rec.setVenda(FormaPagamento.Dinheiro);
+		rec.setTipo(FormaPagamento.Dinheiro);
 		rec.setVendedor(vend);
 		
 		receServ.save(rec);
