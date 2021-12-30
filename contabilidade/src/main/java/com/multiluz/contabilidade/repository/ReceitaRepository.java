@@ -11,11 +11,13 @@ import com.multiluz.contabilidade.model.Receita;
 
 public interface ReceitaRepository extends JpaRepository<Receita, Long> {
 
-	@Query(value= "select 	data, count(valor) as valor, tipo "
-				+ "from		receita "
-				+ "where	data = ?1 "
-				+ "group by tipo "				
-				, nativeQuery = true ) 
-	List<ReceitaDiariaDTO> receitaDiaria(LocalDate data);	
-	
+	@Query(value = "select 	data, count(valor) as valor, tipo "
+			+ "from		receita "
+			+ "where	data = ?1 "
+			+ "group by tipo ", nativeQuery = true)
+	List<ReceitaDiariaDTO> receitaDiaria(LocalDate data);
+
+	@Query(value = "select * from receita where id = ?1", nativeQuery = true)
+	Receita findByIdReceita(Long id);
+
 }

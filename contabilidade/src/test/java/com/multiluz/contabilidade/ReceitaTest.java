@@ -30,30 +30,27 @@ public class ReceitaTest {
 
 	@Mock
 	private ReceitaRepository rr;
-	
+
 	@InjectMocks
 	private ReceitaService receServ;
-	
-	
+
 	@Test
 	void verifySaveReceita() {
 		Receita rec = new Receita();
 		Vendedor vend = new Vendedor();
-		
+
 		vend.setNome("Junior");
-		
+
 		rec.setData(LocalDate.of(2020, 12, 27));
 		rec.setParcelas(1);
 		rec.setValor(26.);
 		rec.setTipo(FormaPagamento.Dinheiro);
 		rec.setVendedor(vend);
-		
+
 		receServ.save(rec);
 		verify(rr, times(1)).save(rec);
 	}
-	
-	
-	
+
 	@Test
 	void verifyLotOfValuesReceita() {
 		Receita rec = new Receita();
@@ -76,43 +73,8 @@ public class ReceitaTest {
 
 		Assert.assertTrue("O somatorio nao bate", rec.getValor() == 3736.1600000000003);
 	}
-	
-	private Receita createReceita (Double valorTotal, FormaPagamento tipo, LocalDate data) {
-		Receita rec = new Receita();
-		rec.setValor(Double.valueOf(0));
-		rec.setTipo(tipo);
-		rec.setData(data);
-		return rec;
-	}
-	
+
 	@Test
 	void comissao() {
-		
-		Receita rec = new Receita();
-		rec.setId(1L);
-		TestUtil tu = new TestUtil();
-		Vendedor vend = new Vendedor();
-		vend.setNome("Junior");
-		vend.setTipo(Colaborador.Vendedor);
-		List<Receita> valores = Arrays.asList(
-				createReceita(550., FormaPagamento.Dinheiro, LocalDate.of(2022, 12, 27)),
-				createReceita(550., FormaPagamento.Dinheiro, LocalDate.of(2022, 12, 27)),
-				createReceita(2340., FormaPagamento.Debito, LocalDate.of(2022, 12, 27)),
-				createReceita(2340., FormaPagamento.Debito, LocalDate.of(2022, 12, 27)),
-				createReceita(40., FormaPagamento.Credito, LocalDate.of(2022, 12, 27)),
-				createReceita(40., FormaPagamento.Credito, LocalDate.of(2022, 12, 27)),
-				createReceita(50., FormaPagamento.Pix, LocalDate.of(2022, 12, 27)),
-				createReceita(50., FormaPagamento.Pix, LocalDate.of(2022, 12, 27))
-		);
-		
-		when(rr
-				.findById(1L))
-				.thenReturn(valores);
-		
-//		rec.setValor(tu.totalizador(valores));
-		
-		Double pagamento = tu.comissao(rec.getValor(), 100., vend.getTipo().toString());
-		
-		Assert.assertTrue("Comissao esta errada", pagamento == 174.72320000000002);
 	}
 }
