@@ -1,5 +1,6 @@
 package com.multiluz.contabilidade;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.multiluz.contabilidade.enuns.FormaPagamento;
 import com.multiluz.contabilidade.model.Receita;
@@ -83,16 +85,24 @@ public class ReceitaTest {
 	void verifyVendedorReceita() {
 		Vendedor v1 = new Vendedor();
 		v1.setNome("jose");
+		Vendedor v2 = new Vendedor();
+		v2.setNome("maria");
 		Receita receita = new Receita();
 		Mockito.when(rr.save(receita)).thenReturn(receita);
 
 		List<Receita> valores = Arrays.asList(
 			new Receita[]{
 				new Receita(LocalDate.of(2021, 12, 20), 20., v1),
-				new Receita(LocalDate.of(2021, 12, 20), 30., v1)
+				new Receita(LocalDate.of(2021, 12, 20), 40., v1),
+				new Receita(LocalDate.of(2021, 12, 20), 45., v1),
+				new Receita(LocalDate.of(2021, 12, 20), 30., v2)
 			}
 		);
-		System.out.println("---------------> VENDEDOR: "+valores.get(0).getVendedor().getNome());
-		Assert.assertEquals("jose", valores.get(0).getVendedor().getNome());
+
+		List<Receita> vendedor = valores.stream().filter(x -> x.getVendedor().getNome() == "jose").collect(Collectors.toList());
+	    Double somatorioVendedor = valores.stream().filter(x -> x.getVendedor().getNome() == "jose").mapToDouble(x -> x.getValor()).sum();
+		Assert.assertTrue(somatorioVendedor == 105.0);
+		
+		//Assert.assertEquals("jose", valores.get(0).getVendedor().getNome());
 	}
 }
