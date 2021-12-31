@@ -16,10 +16,12 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.multiluz.contabilidade.enuns.FormaPagamento;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Data
+@AllArgsConstructor
 public class Receita implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +49,13 @@ public class Receita implements Serializable {
 	@JsonIgnore
 	private Movimento movimento;
 
-	
+	public Receita (LocalDate data, Double valor, Vendedor vendedor){
+		this.data = data;
+		this.valor = valor;
+		this.vendedor = vendedor;
+	}
+
+    public Receita() {
+    }
 
 }

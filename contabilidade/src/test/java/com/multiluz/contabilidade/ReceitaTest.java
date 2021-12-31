@@ -5,13 +5,16 @@ import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.multiluz.contabilidade.enuns.FormaPagamento;
 import com.multiluz.contabilidade.model.Receita;
 import com.multiluz.contabilidade.model.Vendedor;
 import com.multiluz.contabilidade.repository.ReceitaRepository;
+import com.multiluz.contabilidade.repository.VendedorRepository;
 import com.multiluz.contabilidade.service.ReceitaService;
+import com.multiluz.contabilidade.service.VendedorService;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -26,8 +29,14 @@ public class ReceitaTest {
 	@Mock
 	private ReceitaRepository rr;
 
+	@Mock
+	private VendedorRepository vr;
+
 	@InjectMocks
 	private ReceitaService receServ;
+
+	@InjectMocks
+	private VendedorService vendServ;
 
 	@Test
 	void verifySaveReceita() {
@@ -71,10 +80,19 @@ public class ReceitaTest {
 
 	// temos que ver funcionando
 	@Test
-	void comissao() {
+	void verifyVendedorReceita() {
 		Vendedor v1 = new Vendedor();
-		List<Receita> rec = new ArrayList<>();
-		rec.add(new Receita(LocalDate.of(2021, 12, 27), v1));
-		Mockito.when(receServ.createMockReceita(5, rec, v1)).thenReturn(rec);
+		v1.setNome("jose");
+		Receita receita = new Receita();
+		Mockito.when(rr.save(receita)).thenReturn(receita);
+
+		List<Receita> valores = Arrays.asList(
+			new Receita[]{
+				new Receita(LocalDate.of(2021, 12, 20), 20., v1),
+				new Receita(LocalDate.of(2021, 12, 20), 30., v1)
+			}
+		);
+		System.out.println("---------------> VENDEDOR: "+valores.get(0).getVendedor().getNome());
+		Assert.assertEquals("jose", valores.get(0).getVendedor().getNome());
 	}
 }
