@@ -2,28 +2,23 @@ package com.multiluz.contabilidade;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
+import com.multiluz.contabilidade.enuns.FormaPagamento;
+import com.multiluz.contabilidade.model.Receita;
+import com.multiluz.contabilidade.model.Vendedor;
+import com.multiluz.contabilidade.repository.ReceitaRepository;
+import com.multiluz.contabilidade.service.ReceitaService;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.multiluz.contabilidade.enuns.Colaborador;
-import com.multiluz.contabilidade.enuns.FormaPagamento;
-import com.multiluz.contabilidade.enuns.TipoDespesa;
-import com.multiluz.contabilidade.model.Receita;
-import com.multiluz.contabilidade.model.Vendedor;
-import com.multiluz.contabilidade.repository.ReceitaRepository;
-import com.multiluz.contabilidade.service.ReceitaService;
 
 @SpringBootTest
 public class ReceitaTest {
@@ -74,7 +69,12 @@ public class ReceitaTest {
 		Assert.assertTrue("O somatorio nao bate", rec.getValor() == 3736.1600000000003);
 	}
 
+	// temos que ver funcionando
 	@Test
 	void comissao() {
+		Vendedor v1 = new Vendedor();
+		List<Receita> rec = new ArrayList<>();
+		rec.add(new Receita(LocalDate.of(2021, 12, 27), v1));
+		Mockito.when(receServ.createMockReceita(5, rec, v1)).thenReturn(rec);
 	}
 }

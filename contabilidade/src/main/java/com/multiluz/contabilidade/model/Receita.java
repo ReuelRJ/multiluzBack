@@ -23,28 +23,32 @@ import lombok.Data;
 public class Receita implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private LocalDate data;
-	
+
 	private Double valor;
-	
+
 	@Enumerated(EnumType.ORDINAL)
-	@Column(columnDefinition = "smallint")	
+	@Column(columnDefinition = "smallint")
 	private FormaPagamento tipo;
-	
+
 	private int parcelas;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id")
 	private Vendedor vendedor;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "movimento_id")
 	@JsonIgnore
 	private Movimento movimento;
-	
+
+	public Receita(LocalDate date, Vendedor vendedor) {
+
+	}
+
 }
