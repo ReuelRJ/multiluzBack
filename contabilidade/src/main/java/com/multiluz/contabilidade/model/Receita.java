@@ -47,8 +47,6 @@ public class Receita implements Serializable {
 	@JsonIgnore
 	private Movimento movimento;
 
-	public Receita(LocalDate date, Vendedor vendedor) {
-
-	}
+	
 
 }

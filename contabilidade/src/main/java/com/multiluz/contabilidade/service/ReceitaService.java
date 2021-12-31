@@ -22,9 +22,9 @@ public class ReceitaService {
 		receRepo.save(rece);
 	}
 
-	public Object createMockReceita(int howMany, List<Receita> rec, Vendedor v1) {
-		return IntStream.range(0, howMany)
-				.mapToObj(i -> new Receita(LocalDate.of(2021, 12, 21), v1))
-				.collect(Collectors.toList());
-	}
+	// public Object createMockReceita(int howMany, List<Receita> rec, Vendedor v1) {
+	// 	return IntStream.range(0, howMany)
+	// 			.mapToObj(i -> new Receita(LocalDate.of(2021, 12, 21), v1))
+	// 			.collect(Collectors.toList());
+	// }
 }
