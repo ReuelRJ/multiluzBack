@@ -89,7 +89,6 @@ public class ReceitaTest {
 		v2.setNome("maria");
 		Receita receita = new Receita();
 		Mockito.when(rr.save(receita)).thenReturn(receita);
-
 		List<Receita> valores = Arrays.asList(
 			new Receita[]{
 				new Receita(LocalDate.of(2021, 12, 20), 20., v1),
@@ -99,8 +98,8 @@ public class ReceitaTest {
 			}
 		);
 
-		List<Receita> vendedor = valores.stream().filter(x -> x.getVendedor().getNome() == "jose").collect(Collectors.toList());
-	    Double somatorioVendedor = valores.stream().filter(x -> x.getVendedor().getNome() == "jose").mapToDouble(x -> x.getValor()).sum();
+		List<Receita> vendasVendedor = receServ.listaVendasPorVendedor(valores, v1.getNome());
+		Double somatorioVendedor = receServ.somaVendasPorVendedor(valores, v1.getNome());
 		Assert.assertTrue(somatorioVendedor == 105.0);
 		
 		//Assert.assertEquals("jose", valores.get(0).getVendedor().getNome());

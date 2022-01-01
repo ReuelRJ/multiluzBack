@@ -22,9 +22,14 @@ public class ReceitaService {
 		receRepo.save(rece);
 	}
 
-	// public Object createMockReceita(int howMany, List<Receita> rec, Vendedor v1) {
-	// 	return IntStream.range(0, howMany)
-	// 			.mapToObj(i -> new Receita(LocalDate.of(2021, 12, 21), v1))
-	// 			.collect(Collectors.toList());
-	// }
+	//dois metodos para pegar vendas e pegar somatorio de vendas de acordo com o funcionario
+	public Double somaVendasPorVendedor(List<Receita> valores, String nomeVendedor){
+		Double somatorioVendedor = valores.stream().filter(x -> x.getVendedor().getNome() == nomeVendedor).mapToDouble(x -> x.getValor()).sum();
+		return somatorioVendedor;
+	}
+
+	public List<Receita> listaVendasPorVendedor (List<Receita> valores, String nomeVendedor){
+		List<Receita> listVendasVendedor = valores.stream().filter(x -> x.getVendedor().getNome() == nomeVendedor).collect(Collectors.toList());
+		return listVendasVendedor;
+	}
 }
