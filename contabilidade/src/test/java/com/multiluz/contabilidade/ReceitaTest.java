@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.multiluz.contabilidade.enuns.FormaPagamento;
+import com.multiluz.contabilidade.model.Movimento;
 import com.multiluz.contabilidade.model.Receita;
 import com.multiluz.contabilidade.model.Vendedor;
 import com.multiluz.contabilidade.repository.ReceitaRepository;
@@ -39,6 +40,55 @@ public class ReceitaTest {
 
 	@InjectMocks
 	private VendedorService vendServ;
+
+	public List<Receita> cargaReceitasVendedor(String nomeVendedor) {
+		Movimento m = new Movimento();
+		Vendedor v1 = new Vendedor();
+		v1.setNome(nomeVendedor);
+		List<Receita> valores = Arrays.asList(
+				new Receita[] {
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 2, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 2, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 2, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 3, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 3, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 3, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 4, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 4, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 4, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 5, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 5, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 5, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 6, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 6, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 20., FormaPagamento.Credito, 6, v1, m),
+
+						new Receita(1L, LocalDate.of(2021, 12, 20), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 30., FormaPagamento.Debito, 1, v1, m),
+
+						new Receita(1L, LocalDate.of(2021, 12, 20), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 40., FormaPagamento.Dinheiro, 1, v1, m),
+
+						new Receita(1L, LocalDate.of(2021, 12, 20), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2021, 12, 20), 50., FormaPagamento.Pix, 1, v1, m),
+				});
+		return valores;
+	}
 
 	@Test
 	void verifySaveReceita() {
@@ -88,20 +138,13 @@ public class ReceitaTest {
 		Vendedor v2 = new Vendedor();
 		v2.setNome("maria");
 		Receita receita = new Receita();
+		List<Receita> cargaReceita = cargaReceitasVendedor("jose");
 		Mockito.when(rr.save(receita)).thenReturn(receita);
-		List<Receita> valores = Arrays.asList(
-			new Receita[]{
-				new Receita(LocalDate.of(2021, 12, 20), 20., v1),
-				new Receita(LocalDate.of(2021, 12, 20), 40., v1),
-				new Receita(LocalDate.of(2021, 12, 20), 45., v1),
-				new Receita(LocalDate.of(2021, 12, 20), 30., v2)
-			}
-		);
 
-		List<Receita> vendasVendedor = receServ.listaVendasPorVendedor(valores, v1.getNome());
-		Double somatorioVendedor = receServ.somaVendasPorVendedor(valores, v1.getNome());
-		Assert.assertTrue(somatorioVendedor == 105.0);
-		
-		//Assert.assertEquals("jose", valores.get(0).getVendedor().getNome());
+		List<Receita> vendasVendedor = receServ.listaVendasPorVendedor(cargaReceita, v1.getNome());
+		Double somatorioVendedor = receServ.somaVendasPorVendedor(cargaReceita, v1.getNome());
+		Assert.assertTrue(somatorioVendedor == 1080.0);
+
+		// Assert.assertEquals("jose", valores.get(0).getVendedor().getNome());
 	}
 }
