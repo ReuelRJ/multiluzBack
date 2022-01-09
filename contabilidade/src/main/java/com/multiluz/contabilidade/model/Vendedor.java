@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,34 +24,32 @@ import lombok.Data;
 public class Vendedor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
-	
+
 	@Enumerated(EnumType.ORDINAL)
 	@Column(columnDefinition = "smallint")
 	private Colaborador tipo;
-	
+
 	@OneToOne(mappedBy = "vendedor", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Endereco endereco;
-	
+
 	@OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Telefone> telefones;
-	
+
 	@OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Receita> vendas;
-	
+
 	@OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Despesa> despesas;
-	
-	
-	
+
 }
