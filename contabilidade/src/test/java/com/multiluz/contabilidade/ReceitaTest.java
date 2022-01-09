@@ -4,9 +4,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import com.multiluz.contabilidade.enuns.FormaPagamento;
+import com.multiluz.contabilidade.model.Movimento;
 import com.multiluz.contabilidade.model.Receita;
 import com.multiluz.contabilidade.model.Vendedor;
 import com.multiluz.contabilidade.repository.ReceitaRepository;
@@ -36,8 +38,6 @@ public class ReceitaTest {
 	@InjectMocks
 	private VendedorService vendServ;
 
-<<<<<<< HEAD
-=======
 	public List<Receita> cargaReceitasVendedor(String nomeVendedor) {
 		Movimento m = new Movimento();
 		Vendedor v1 = new Vendedor();
@@ -87,7 +87,6 @@ public class ReceitaTest {
 		return valores;
 	}
 
->>>>>>> a52942f102d45b847cdee576857deb6b00d4c064
 	@Test
 	void verifySaveReceita() {
 		Receita rec = new Receita();
@@ -110,24 +109,11 @@ public class ReceitaTest {
 	void verifyLotOfValuesReceita() {
 		List<Receita> cargaReceita = tu.cargaReceitasVendedores(LocalDate.of(2021, 12, 27), "jose", "maria", "antonio",
 				10l);
-		Double totalVendasDia = receServ.somaVendasDia(cargaReceita, LocalDate.of(2021, 12, 27));
-		Mockito.when(receServ.somaVendasDia(cargaReceita, LocalDate.of(2021, 12, 27))).thenReturn(totalVendasDia);
-		System.out.println("-------------------> Vendas: " + cargaReceita);
-		System.out.println("-------------------> Vendas: " + totalVendasDia);
 	}
 
 	// temos que ver funcionando
 	@Test
 	void verifyVendedorReceita() {
-<<<<<<< HEAD
-		List<Receita> cargaReceita = tu.cargaReceitasVendedores(LocalDate.of(2021, 12, 27), "jose", "maria", "antonio",
-				30l);
-		List<Receita> vendasVendedor = receServ.listaVendasPorVendedor(cargaReceita, "jose");
-		System.out.println("-------------------> Quantidade de Vendas: " + cargaReceita.size());
-		System.out.println("-------------------> Quantidade de Vendas jose: "
-				+ vendasVendedor.size());
-	}
-=======
 		Vendedor v1 = new Vendedor();
 		v1.setNome("jose");
 		Vendedor v2 = new Vendedor();
@@ -136,10 +122,12 @@ public class ReceitaTest {
 		List<Receita> cargaReceita = cargaReceitasVendedor("jose");
 		Mockito.when(rr.save(receita)).thenReturn(receita);
 
-		//List<Receita> vendasVendedor = receServ.listaVendasPorVendedor(cargaReceita, v1.getNome());
-		//Double somatorioVendedor = receServ.somaVendasPorVendedor(cargaReceita, v1.getNome());
-		//Assert.assertTrue(somatorioVendedor == 1080.0);
->>>>>>> a52942f102d45b847cdee576857deb6b00d4c064
+		// List<Receita> vendasVendedor = receServ.listaVendasPorVendedor(cargaReceita,
+		// v1.getNome());
+		// Double somatorioVendedor = receServ.somaVendasPorVendedor(cargaReceita,
+		// v1.getNome());
+		// Assert.assertTrue(somatorioVendedor == 1080.0);
+	}
 
 	@Test
 	void teste() {
