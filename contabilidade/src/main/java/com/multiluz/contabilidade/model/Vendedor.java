@@ -38,6 +38,7 @@ public class Vendedor implements Serializable {
 	private Colaborador tipo;
 	
 	@OneToOne(mappedBy = "vendedor", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Endereco endereco;
 	
 	@OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
@@ -48,7 +49,7 @@ public class Vendedor implements Serializable {
 	@JsonIgnore
 	private List<Receita> vendas;
 	
-	@ManyToMany(targetEntity = Despesa.class, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Despesa> despesas;
 	

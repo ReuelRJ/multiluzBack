@@ -39,11 +39,11 @@ public class Despesa implements Serializable{
 	@Column(columnDefinition = "smallint")	
 	private TipoDespesa tipo;
 	
-	private int parcela;
+	private int parcelas;
 		
-	@ManyToMany(targetEntity = Vendedor.class, mappedBy = "despesas", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<Vendedor> vendedores;
+	@ManyToOne
+	@JoinColumn(name = "vendedor_id")
+	private Vendedor vendedor;
 	
 	@ManyToOne
 	@JoinColumn(name = "movimento_id")

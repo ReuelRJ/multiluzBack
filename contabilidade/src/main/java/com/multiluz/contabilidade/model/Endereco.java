@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -33,5 +35,6 @@ public class Endereco implements Serializable{
 	private String cep;
 	
 	@OneToOne 
+	@JsonIgnore
 	private Vendedor vendedor;
 }

@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -29,6 +31,7 @@ public class Telefone implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id")
+	@JsonIgnore
 	private Vendedor vendedor;
 
 }

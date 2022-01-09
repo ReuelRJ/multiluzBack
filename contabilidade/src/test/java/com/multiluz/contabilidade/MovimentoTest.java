@@ -25,7 +25,7 @@ class MovimentoTest {
 	@Test
 	void verifyMovimento() {
 		
-		List<ReceitaDiariaDTO> lista = ms.fechaMovimentoReceita(LocalDate.of(2021, 12, 29));
+		List<ReceitaDiariaDTO> lista = ms.fechaMovimentoReceita("29122021");
 		
 		Assert.assertTrue("Não tem dados", lista.size() == 0);
 		

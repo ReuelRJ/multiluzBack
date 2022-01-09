@@ -6,18 +6,34 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.multiluz.contabilidade.dto.ReceitaDiariaDTO;
+import com.multiluz.contabilidade.model.Movimento;
 import com.multiluz.contabilidade.model.Receita;
 
 public interface ReceitaRepository extends JpaRepository<Receita, Long> {
 
-	@Query(value = "select 	data, count(valor) as valor, tipo "
-			+ "from		receita "
-			+ "where	data = ?1 "
-			+ "group by tipo ", nativeQuery = true)
-	List<ReceitaDiariaDTO> receitaDiaria(LocalDate data);
+	@Query(value = "select id, data, sum(valor) as valor, tipo, vendedor_id, movimento_id, parcelas "
+				+  "from	receita "
+				+  "where	data = ?1 "
+				+  "group by tipo ", nativeQuery = true)
+	List<Receita> receitaDiariaByTipo(LocalDate data);
 
-	@Query(value = "select * from receita where id = ?1", nativeQuery = true)
-	Receita findByIdReceita(Long id);
+	@Query(value = "select id, data, sum(valor) as valor, tipo, vendedor_id, movimento_id, parcelas "
+				+  "from	receita "
+				+  "where	data = ?1 "
+				+  "group by vendedor_id ", nativeQuery = true)
+	List<Receita> receitaDiariaByVendedor(LocalDate data);
 
+
+	@Query(value = "select id, data, sum(valor) as valor, tipo, vendedor_id, movimento_id, parcelas "
+				+  "from	receita "
+				+  "where	data = ?1 "
+				+  "group by tipo, vendedor_id ", nativeQuery = true)
+	List<Receita> receitaDiariaByTipoVendedor(LocalDate data);
+
+	@Query(value = "select id, data, sum(valor) as valor, tipo, vendedor_id, movimento_id, parcelas "
+			+  "from	receita "
+			+  "where	data = ?1 "
+			+  "group by data ", nativeQuery = true)
+	Receita receitaDiariaTotalGeral(LocalDate data);	
+	
 }
