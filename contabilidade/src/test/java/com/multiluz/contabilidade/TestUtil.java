@@ -24,13 +24,13 @@ public class TestUtil {
 		return total;
 	}
 
-	public double comissao(Double valor, Double fixo, String vendedor) {
+	public double comissao(Double valor, Double fixo, Vendedor vendedor) {
 		double pagamento = 0.;
-		if (vendedor == Colaborador.Vendedor.toString()) {
+		if (vendedor.getTipo().equals(Colaborador.Vendedor)) {
 			pagamento = (valor * 0.02) + fixo;
-		} else if (vendedor == Colaborador.Estoquista.toString()) {
+		} else if (vendedor.getTipo().equals(Colaborador.Estoquista)) {
 			pagamento = (valor * 0.01) + fixo;
-		} else if (vendedor == Colaborador.Gerente.toString()) {
+		} else if (vendedor.getTipo().equals(Colaborador.Gerente)) {
 			pagamento = 0.;
 		}
 		return pagamento;

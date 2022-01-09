@@ -36,6 +36,58 @@ public class ReceitaTest {
 	@InjectMocks
 	private VendedorService vendServ;
 
+<<<<<<< HEAD
+=======
+	public List<Receita> cargaReceitasVendedor(String nomeVendedor) {
+		Movimento m = new Movimento();
+		Vendedor v1 = new Vendedor();
+		v1.setNome(nomeVendedor);
+		List<Receita> valores = Arrays.asList(
+				new Receita[] {
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 2, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 2, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 2, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 3, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 3, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 3, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 4, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 4, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 4, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 5, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 5, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 5, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 6, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 6, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 20., FormaPagamento.Credito, 6, v1, m),
+
+						new Receita(1L, LocalDate.of(2020, 12, 27), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 30., FormaPagamento.Debito, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 30., FormaPagamento.Debito, 1, v1, m),
+
+						new Receita(1L, LocalDate.of(2020, 12, 27), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 40., FormaPagamento.Dinheiro, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 40., FormaPagamento.Dinheiro, 1, v1, m),
+
+						new Receita(1L, LocalDate.of(2020, 12, 27), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 50., FormaPagamento.Pix, 1, v1, m),
+						new Receita(1L, LocalDate.of(2020, 12, 27), 50., FormaPagamento.Pix, 1, v1, m),
+				});
+		return valores;
+	}
+
+>>>>>>> a52942f102d45b847cdee576857deb6b00d4c064
 	@Test
 	void verifySaveReceita() {
 		Receita rec = new Receita();
@@ -67,6 +119,7 @@ public class ReceitaTest {
 	// temos que ver funcionando
 	@Test
 	void verifyVendedorReceita() {
+<<<<<<< HEAD
 		List<Receita> cargaReceita = tu.cargaReceitasVendedores(LocalDate.of(2021, 12, 27), "jose", "maria", "antonio",
 				30l);
 		List<Receita> vendasVendedor = receServ.listaVendasPorVendedor(cargaReceita, "jose");
@@ -74,6 +127,19 @@ public class ReceitaTest {
 		System.out.println("-------------------> Quantidade de Vendas jose: "
 				+ vendasVendedor.size());
 	}
+=======
+		Vendedor v1 = new Vendedor();
+		v1.setNome("jose");
+		Vendedor v2 = new Vendedor();
+		v2.setNome("maria");
+		Receita receita = new Receita();
+		List<Receita> cargaReceita = cargaReceitasVendedor("jose");
+		Mockito.when(rr.save(receita)).thenReturn(receita);
+
+		//List<Receita> vendasVendedor = receServ.listaVendasPorVendedor(cargaReceita, v1.getNome());
+		//Double somatorioVendedor = receServ.somaVendasPorVendedor(cargaReceita, v1.getNome());
+		//Assert.assertTrue(somatorioVendedor == 1080.0);
+>>>>>>> a52942f102d45b847cdee576857deb6b00d4c064
 
 	@Test
 	void teste() {

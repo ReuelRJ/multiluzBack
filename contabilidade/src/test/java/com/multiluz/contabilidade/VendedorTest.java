@@ -103,10 +103,4 @@ class VendedorTest {
 		Assert.assertTrue("O Telefone do vendedor não está correto", v1.getTelefones().get(0).getTelCel() == 995000102);
 	}
 		
-		
-		
-		
-		
-		
-	
 }

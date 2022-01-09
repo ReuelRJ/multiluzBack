@@ -42,6 +42,7 @@ public class Receita implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id")
+	@JsonIgnore
 	private Vendedor vendedor;
 
 	@ManyToOne
@@ -55,6 +56,14 @@ public class Receita implements Serializable {
 		this.vendedor = vendedor;
 	}
 
+	public Receita (LocalDate data, int parcelas, Double valor, FormaPagamento tipo, Vendedor vendedor){
+		this.data = data;
+		this.parcelas = parcelas;
+		this.valor = valor;
+		this.tipo = tipo;
+		this.vendedor = vendedor;
+	}	
+	
     public Receita() {
     }
 

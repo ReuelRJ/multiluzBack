@@ -35,7 +35,7 @@ public class DespesaTest {
 		Despesa desp = new Despesa();
 
 		desp.setData(LocalDate.of(2020, 12, 27));
-		desp.setParcela(1);
+		desp.setParcelas(1);
 		desp.setTipo(TipoDespesa.Diaria);
 		desp.setValor(2.);
 
@@ -48,7 +48,7 @@ public class DespesaTest {
 		Despesa desp = new Despesa();
 
 		desp.setData(LocalDate.of(2020, 12, 27));
-		desp.setParcela(1);
+		desp.setParcelas(1);
 		desp.setTipo(TipoDespesa.Diaria);
 		desp.setValor(2.);
 
@@ -61,7 +61,7 @@ public class DespesaTest {
 		Despesa desp = new Despesa();
 
 		desp.setData(LocalDate.of(2020, 12, 27));
-		desp.setParcela(1);
+		desp.setParcelas(1);
 		desp.setTipo(TipoDespesa.Pendencia);
 		desp.setValor(2.);
 
@@ -74,7 +74,7 @@ public class DespesaTest {
 		Despesa desp = new Despesa();
 
 		desp.setData(LocalDate.of(2020, 12, 27));
-		desp.setParcela(1);
+		desp.setParcelas(1);
 		desp.setTipo(TipoDespesa.Vale);
 		desp.setValor(2.);
 
