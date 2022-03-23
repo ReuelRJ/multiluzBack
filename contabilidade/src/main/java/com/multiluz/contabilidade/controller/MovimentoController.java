@@ -17,49 +17,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(value = "/v1")
 public class MovimentoController {
 
-	@Autowired
-	MovimentoService ms;
+	private final MovimentoService ms;
 
-	@Autowired
-	ReceitaService rs;
+	private final ReceitaService rs;
 
-	@Autowired
-	DespesaService ds;
+	private final DespesaService ds;
 
 	// RECURSOS
 
 	@GetMapping(value = "/movimentos/receita/{data}")
 	public ResponseEntity<List<ReceitaDiariaDTO>> fechaMovimentoReceita(@PathVariable String data) {
 		List<ReceitaDiariaDTO> receitaDiaria = ms.fechaMovimentoReceita(data);
-		if (receitaDiaria == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<List<ReceitaDiariaDTO>>(receitaDiaria, HttpStatus.OK);
-		}
+		return (receitaDiaria == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
+				: new ResponseEntity<List<ReceitaDiariaDTO>>(receitaDiaria, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/movimentos/despesa/{data}")
 	public ResponseEntity<List<DespesaDiariaDTO>> fechaMovimentoDespesa(@PathVariable String data) {
 		List<DespesaDiariaDTO> despesaDiaria = ms.fechaMovimentoDespesa(data);
-		if (despesaDiaria == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<List<DespesaDiariaDTO>>(despesaDiaria, HttpStatus.OK);
-		}
+		return (despesaDiaria == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
+				: new ResponseEntity<List<DespesaDiariaDTO>>(despesaDiaria, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/movimentos/{data}")
 	public ResponseEntity<Movimento> fechaMovimento(@PathVariable String data) {
 		Movimento movimento = ms.fechaMovimento(data);
-		if (movimento == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<Movimento>(movimento, HttpStatus.OK);
-		}
+		return (movimento == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
+				: new ResponseEntity<Movimento>(movimento, HttpStatus.OK);
+
 	}
 
 	/*

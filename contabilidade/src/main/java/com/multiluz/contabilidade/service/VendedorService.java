@@ -14,13 +14,13 @@ public class VendedorService {
 
 	@Autowired
 	private VendedorRepository vr;
-	
+
 	public Vendedor findVendedor(Long id) {
 		Optional<Vendedor> o1 = vr.findById(id);
-		//if (o1.isPresent()) {...		
+		// if (o1.isPresent()) {...
 		return o1.get();
 	}
-	
+
 	// documentar os metodos
 	public List<Vendedor> vendedorList() {
 		List<Vendedor> vendedorList = vr.findAll();
@@ -30,19 +30,19 @@ public class VendedorService {
 	public Vendedor save(Vendedor vendedor) {
 		return vr.save(vendedor);
 	}
-	
+
 	public Vendedor vendedorUpdate(Vendedor vendedor, Long id) {
 		Optional<Vendedor> so = vr.findById(id);
-		if(!so.isPresent()) {
+		if (!so.isPresent()) {
 			return null;
-		}else {
+		} else {
 			vendedor.setId(so.get().getId());
 			return vr.save(vendedor);
 		}
 	}
-	
+
 	public void vendedorDelete(Long id) {
 		vr.deleteById(id);
-	}	
-	
+	}
+
 }
